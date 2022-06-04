@@ -1,0 +1,20 @@
+{
+  "common": {
+    "brandName": "React Native Boilerplate",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No",
+    "drawerButton": "Drawer Button"
+  },
+  "homeScreen": {
+    "appbarTitle": "Irrigação",
+    "message": "React Native Boilerplate",
+    "scheduleButton": "Agendamento",
+    "apiCallStatus": "Api call status"
+  },
+  "scheduleScreen": {
+    "appbarTitle": "Agendamento",
+    "darkMode": "Dark Mode"
+  }
+}
