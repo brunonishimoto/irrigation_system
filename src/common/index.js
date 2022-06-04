@@ -8,6 +8,7 @@ import Schedule from './Schedule';
 import TimePicker from './TimePicker';
 import ScheduleButton from './ScheduleButton';
 import AddButton from './AddButton';
+import SetTime from './SetTime';
 
 export {
   Text,
@@ -20,4 +21,5 @@ export {
   TimePicker,
   ScheduleButton,
   AddButton,
+  SetTime,
 };

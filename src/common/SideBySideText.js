@@ -2,8 +2,6 @@ import React from "react";
 import { SideBySideTextStyle } from '../theme'
 import {Text, View } from "react-native";
 
-const irrigation_image = require("../assets/images/irrigation.jpg");
-
 const SideBySideText = ({ status }) => {
   return (
     <View style={SideBySideTextStyle.row}>

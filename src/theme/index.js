@@ -8,6 +8,7 @@ import OnOffButtonStyle from './OnOffButtonStyle'
 import HomeStyle from './HomeStyle'
 import ScheduleStyle from './ScheduleStyle'
 import SettingStyle from './SettingStyle';
+import SetTimeStyle from './SetTime';
 
 
 export {
@@ -21,4 +22,5 @@ export {
   HomeStyle,
   ScheduleStyle,
   SettingStyle,
+  SetTimeStyle,
 };
