@@ -14,6 +14,12 @@ class Api {
   changeStatus() {
     return this.request.get('/changeStatus')
   }
+  getTime() {
+    return this.request.get('/time')
+  }
+  changeTime(time) {
+    return this.request.put('/time', undefined, time)
+  }
   getSchedule() {
     return this.request.get('/schedule')
   }

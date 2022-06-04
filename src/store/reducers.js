@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import HomeReducer from './home/homeReducer';
 import IrrigationReducer from './irrigation/irrigationReducer';
 import ScheduleReducer from './schedule/scheduleReducer';
+import TimeReducer from './time/timeReducer'
 
 export default combineReducers({
-  // home: HomeReducer,
   irrigation: IrrigationReducer,
   schedule: ScheduleReducer,
+  time: TimeReducer
 });
