@@ -26,7 +26,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         apiStatus: Status.SUCCESS,
-        status: payload.status,
+        time: payload.time,
       };
     case GET_TIME_ERROR:
     case CHANGE_TIME_ERROR:

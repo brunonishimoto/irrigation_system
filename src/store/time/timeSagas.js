@@ -24,10 +24,10 @@ function* fetchGetTime() {
 }
 
 // worker saga: Fetch Trending repositories when watcher saga sees the action
-function* fetchChangeTime() {
+function* fetchChangeTime({ payload }) {
   try {
     yield put({ type: CHANGE_TIME_LOADING });
-    const response = yield call({ context: api, fn: api.changeTime });
+    const response = yield call({ context: api, fn: api.changeTime }, payload);
     yield put({ type: CHANGE_TIME_SUCCESS, payload: { time: response.time } });
   }
   catch (error) {

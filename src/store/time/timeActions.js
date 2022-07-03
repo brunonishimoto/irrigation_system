@@ -12,7 +12,7 @@ export const getTime = () => ({
   type: GET_TIME_REQUEST
 });
 
-export const changeTime = (minutes) => ({
+export const changeTime = (time) => ({
   type: CHANGE_TIME_REQUEST,
-  payload: {"minutes": minutes }
+  payload: time
 });

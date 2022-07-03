@@ -2,7 +2,7 @@ import axios from 'axios';
 import Logger from './helper/apiLogger';
 
 const defaultOptions = {
-  baseUrl: 'http://192.168.1.107:5000',
+  baseUrl: 'http://192.168.1.105:8080',
   basePath: '', // Example: 'rest/V1/'
   // userAgent: 'ARCN mobile module',
 }
