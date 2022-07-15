@@ -11,15 +11,19 @@ class Api {
   getStatus() {
     return  this.request.get('/getStatus')
   }
-  changeStatus() {
-    return this.request.get('/changeStatus')
+  changeStatus({ duration }) {
+    const params = {
+      "duration": duration
+    }
+
+    return this.request.get('/changeStatus', params, undefined)
   }
-  getTime() {
-    return this.request.get('/time')
-  }
-  changeTime(time) {
-    return this.request.put('/time', undefined, time)
-  }
+  // getTime() {
+  //   return this.request.get('/time')
+  // }
+  // changeTime(time) {
+  //   return this.request.put('/time', undefined, time)
+  // }
   getSchedule() {
     return this.request.get('/schedule')
   }

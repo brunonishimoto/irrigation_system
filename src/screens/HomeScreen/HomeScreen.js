@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Alert, View, TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,28 +8,25 @@ import {NAVIGATION_TO_SETTINGS_SCREEN} from '../../navigation';
 import {Status} from '../../api';
 import {translate} from '../../i18n';
 import {loadTheme} from '../../utils';
-import {ThemeContext, lightTheme, darkTheme, HomeStyle, SideBySideTextStyle} from '../../theme';
+import {ThemeContext, HomeStyle, SetTimeStyle} from '../../theme';
 
 const HomeScreen = ({
   apiStatus,
   errorMessage,
   status,
-  time,
   getStatus: _getStatus,
   changeStatus: _changeStatus,
-  getTime: _getTime,
-  changeTime: _changeTime,
   /**
    * @source react-navigation
    */
   navigation,
 }) => {
   const {theme, setTheme} = useContext(ThemeContext);
+  const [duration, setDuration] = useState(null);
 
   useEffect(() => {
     // componentDidMount
     _getStatus();
-    _getTime();
     // loadTheme()
     //   .then((themeType) => {
     //     if (themeType) {
@@ -41,14 +38,9 @@ const HomeScreen = ({
   }, []);
 
   const onPress = () => {
-    _changeStatus();
+    _changeStatus(duration);
     const stringStatus = status ? "desligado" : "ligado";
     Alert.alert("Sistema de Irrigação " + stringStatus);
-  }
-
-  const onChangeTime = ({ nativeEvent }) => {
-    _changeTime({"time": nativeEvent.text});
-    // Alert.alert("Sistema de Irrigação " + stringStatus);
   }
 
   return (
@@ -61,7 +53,16 @@ const HomeScreen = ({
         <View style={{alignItems: "center"}}>
           <OnOffButton status={status} onPress={onPress}/>
         </View>
-        <SetTime value={time} onSubmitEditing={onChangeTime}/>
+        <View style={SetTimeStyle.row}>
+          <View>
+            <TextInput style={SetTimeStyle.left_text} keyboardType="numeric" defaultValue={(duration === null) ? '': duration.toString()}
+            onChangeText={text => setDuration(text)}/>
+          </View>
+          <View>
+            <Text style={SetTimeStyle.right_text}> Minutos</Text>
+          </View>
+        </View>
+        {/* <SetTime value={duration} onChangeText={setDuration}/> */}
       </View>
       <Button
         title={translate('homeScreen.scheduleButton')}
@@ -87,13 +88,11 @@ HomeScreen.defaultProps = {
 
 const mapStateToProps = (home) => {
   const {apiStatus, errorMessage, status} = home.irrigation;
-  const { time } = home.time;
   return {
     apiStatus,
     errorMessage,
     status,
-    time,
   };
 };
 
-export default connect(mapStateToProps, {getStatus, changeStatus, getTime, changeTime})(HomeScreen);
+export default connect(mapStateToProps, {getStatus, changeStatus})(HomeScreen);

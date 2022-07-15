@@ -24,10 +24,10 @@ function* fetchGetStatus() {
 }
 
 // worker saga: Fetch Trending repositories when watcher saga sees the action
-function* fetchChangeStatus() {
+function* fetchChangeStatus(duration) {
   try {
     yield put({ type: CHANGE_STATUS_LOADING });
-    const response = yield call({ context: api, fn: api.changeStatus });
+    const response = yield call({ context: api, fn: api.changeStatus }, duration);
     yield put({ type: CHANGE_STATUS_SUCCESS, payload: { status: response.status } });
   }
   catch (error) {

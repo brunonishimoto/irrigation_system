@@ -2,7 +2,7 @@ import axios from 'axios';
 import Logger from './helper/apiLogger';
 
 const defaultOptions = {
-  baseUrl: 'http://192.168.1.105:8080',
+  baseUrl: 'http://irrigacao-aurelions.pitunnel.com',
   basePath: '', // Example: 'rest/V1/'
   // userAgent: 'ARCN mobile module',
 }

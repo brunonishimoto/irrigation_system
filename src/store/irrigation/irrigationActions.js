@@ -12,6 +12,7 @@ export const getStatus = () => ({
   type: GET_STATUS_REQUEST
 });
 
-export const changeStatus = () => ({
-  type: CHANGE_STATUS_REQUEST
+export const changeStatus = (duration) => ({
+  type: CHANGE_STATUS_REQUEST,
+  duration: duration
 });
