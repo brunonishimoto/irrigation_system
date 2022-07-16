@@ -22,7 +22,7 @@ const HomeScreen = ({
   navigation,
 }) => {
   const {theme, setTheme} = useContext(ThemeContext);
-  const [duration, setDuration] = useState(null);
+  const [duration, setDuration] = useState('0');
 
   useEffect(() => {
     // componentDidMount
@@ -55,11 +55,11 @@ const HomeScreen = ({
         </View>
         <View style={SetTimeStyle.row}>
           <View>
-            <TextInput style={SetTimeStyle.left_text} keyboardType="numeric" defaultValue={(duration === null) ? '': duration.toString()}
+            <TextInput style={SetTimeStyle.left_text} keyboardType="numeric" defaultValue={(duration === '0' || duration === '') ? '': duration.toString()}
             onChangeText={text => setDuration(text)}/>
           </View>
           <View>
-            <Text style={SetTimeStyle.right_text}> Minutos</Text>
+            <Text style={SetTimeStyle.right_text}> {(duration === '0' || duration === '') ? 'Adicionar Duração': 'Minutos'}</Text>
           </View>
         </View>
         {/* <SetTime value={duration} onChangeText={setDuration}/> */}

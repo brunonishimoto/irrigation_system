@@ -55,7 +55,7 @@ const ScheduleScreen = ({
           {schedule && schedule.length === 0 && (
             <Text>Nenhum horário</Text>
           )}
-          {schedule && sortTime(schedule).map(a => (
+          {schedule && sortTime(schedule).filter(a => !isNaN(a.uid)).map(a => (
             <Schedule
               key={a.uid}
               uid={a.uid}
@@ -67,6 +67,7 @@ const ScheduleScreen = ({
               onPress={() => navigation.navigate(NAVIGATION_TO_EDIT_SCHEDULE_SCREEN, { "schedule": a })}
               hour={a.hour}
               minutes={a.minute}
+              duration={a.duration}
               isActive={a.active}
             />
           ))}

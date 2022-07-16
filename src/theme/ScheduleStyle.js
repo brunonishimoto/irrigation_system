@@ -25,6 +25,10 @@ const ScheduleStyle = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'bold',
   },
+  duration: {
+    color: 'gray',
+    fontSize: 15,
+  },
   title: {
     fontSize: 10,
   },

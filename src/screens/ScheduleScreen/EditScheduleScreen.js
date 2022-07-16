@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, TextInput, Text } from 'react-native';
 import { TimePicker, ScheduleButton } from '../../common';
 import {addSchedule, updateSchedule, deleteSchedule} from '../../store/actions';
-import { ScheduleStyle } from '../../theme';
+import { ScheduleStyle, SetTimeStyle } from '../../theme';
 
 const EditScheduleScreen = ({
   apiStatus,
@@ -16,6 +16,7 @@ const EditScheduleScreen = ({
 }) => {
   const [schedule, setSchedule] = useState(null);
   const [mode, setMode] = useState(null);
+  const [duration, setDuration] = useState(15)
 
   useEffect(() => {
     if (route.params && route.params.schedule.uid) {
@@ -40,11 +41,11 @@ const EditScheduleScreen = ({
 
   function onSave () {
     if (mode === 'EDIT') {
-      schedule.active = true;
-      _updateSchedule(schedule.uid, {"active": true, "hour": schedule.hour, "minute": schedule.minute});
+      // schedule.active = true;
+      _updateSchedule(schedule.uid, {"active": schedule.active, "hour": schedule.hour, "minute": schedule.minute, "duration": parseInt(duration)});
     }
     if (mode === 'CREATE') {
-      _addSchedule(schedule.hour, schedule.minute);
+      _addSchedule(schedule.hour, schedule.minute, parseInt(duration));
     }
     navigation.goBack();
   }
@@ -68,6 +69,15 @@ const EditScheduleScreen = ({
             hour={schedule.hour}
             minutes={schedule.minute}
           />
+        </View>
+        <View style={SetTimeStyle.row}>
+          <View>
+            <TextInput style={SetTimeStyle.left_text} keyboardType="numeric" defaultValue={(duration === null) ? '': duration.toString()}
+            onChangeText={text => setDuration(text)}/>
+          </View>
+          <View>
+            <Text style={SetTimeStyle.right_text}> Minutos</Text>
+          </View>
         </View>
         <View style={styles.buttonContainer}>
           {mode === 'EDIT' && (

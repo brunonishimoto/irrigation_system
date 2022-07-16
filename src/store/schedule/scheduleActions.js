@@ -23,15 +23,15 @@ export const getSchedule = () => ({
   type: GET_SCHEDULE_REQUEST
 });
 
-export const addSchedule = (hour, minute) => ({
+export const addSchedule = (hour, minute, duration) => ({
   type: ADD_SCHEDULE_REQUEST,
-  payload: {"hour": hour, "minute": minute }
+  payload: {"hour": hour, "minute": minute, "duration": duration }
 });
 
 export const updateSchedule = (uid, payload) => ({
   type: UPDATE_SCHEDULE_REQUEST,
   uid: uid,
-  payload: {"hour": payload["hour"], "minute": payload["minute"], "active": payload["active"]}
+  payload: {"hour": payload["hour"], "minute": payload["minute"], "active": payload["active"], "duration": payload["duration"]}
 });
 
 export const deleteSchedule = (uid) => ({
