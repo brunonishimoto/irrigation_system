@@ -2,13 +2,14 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Alert, View, TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getStatus, changeStatus, getTime, changeTime} from '../../store/actions';
-import {Text, Button, Header, OnOffButton, SideBySideText, SetTime} from '../../common';
+import {getStatus, changeStatus} from '../../store/actions';
+import {Text, Button, Header, OnOffButton, SideBySideText, Modal} from '../../common';
+import Spinner from 'react-native-loading-spinner-overlay';
 import {NAVIGATION_TO_SETTINGS_SCREEN} from '../../navigation';
-import {Status} from '../../api';
+import {api, Status} from '../../api';
 import {translate} from '../../i18n';
 import {loadTheme} from '../../utils';
-import {ThemeContext, HomeStyle, SetTimeStyle} from '../../theme';
+import {ThemeContext, HomeStyle, SetTimeStyle, SpinnerStyle} from '../../theme';
 
 const HomeScreen = ({
   apiStatus,
@@ -23,6 +24,7 @@ const HomeScreen = ({
 }) => {
   const {theme, setTheme} = useContext(ThemeContext);
   const [duration, setDuration] = useState('0');
+  const [modalVisible, setModalVisible] = useState(true)
 
   useEffect(() => {
     // componentDidMount
@@ -38,17 +40,39 @@ const HomeScreen = ({
   }, []);
 
   const onPress = () => {
+    setModalVisible(true)
     _changeStatus(duration);
-    const stringStatus = status ? "desligado" : "ligado";
-    Alert.alert("Sistema de Irrigação " + stringStatus);
+    // const stringStatus = status ? "desligado" : "ligado";
+    // Alert.alert("Sistema de Irrigação " + stringStatus);
+  }
+
+  const handleModal = () => {
+    setModalVisible(false)
   }
 
   return (
     <View style={HomeStyle.container}>
+      <Spinner
+        //visibility of Overlay Loading Spinner
+        visible={(apiStatus === Status.LOADING)}
+        //Text with the Spinner
+        textContent={'Loading...'}
+        //Text style of the Spinner Text
+        textStyle={SpinnerStyle.spinnerTextStyle}
+      />
+      <Modal isVisible={apiStatus === Status.ERROR && modalVisible}>
+        <Modal.Container>
+          <Modal.Header title="Erro de Conexão" />
+          <Modal.Body>
+            <Text>Não foi possível se conectar com o dispositivo</Text>
+            </Modal.Body>
+          <Modal.Footer>
+            <Button title="OK" onPress={handleModal} />
+          </Modal.Footer>
+        </Modal.Container>
+      </Modal>
       <Header/>
       <View style={HomeStyle.body(theme)}>
-      {/* <Text>{`${translate('homeScreen.apiCallStatus')} : ${apiStatus}`}</Text>
-          {errorMessage !== '' && <Text>{errorMessage}</Text>} */}
         <SideBySideText status={status} />
         <View style={{alignItems: "center"}}>
           <OnOffButton status={status} onPress={onPress}/>
@@ -62,7 +86,7 @@ const HomeScreen = ({
             <Text style={SetTimeStyle.right_text}> {(duration === '0' || duration === '') ? 'Adicionar Duração': 'Minutos'}</Text>
           </View>
         </View>
-        {/* <SetTime value={duration} onChangeText={setDuration}/> */}
+        {/* <View><Text>{apiStatus}</Text></View> */}
       </View>
       <Button
         title={translate('homeScreen.scheduleButton')}

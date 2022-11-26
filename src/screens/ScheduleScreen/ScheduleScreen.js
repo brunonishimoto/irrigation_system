@@ -4,11 +4,10 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Text, Schedule, AddButton} from '../../common';
 import {Status} from '../../api';
-import {translate} from '../../i18n';
 import {getSchedule, addSchedule, updateSchedule} from '../../store/actions';
-import {ThemeContext, lightTheme, darkTheme, SettingStyle} from '../../theme';
+import {ThemeContext, SettingStyle} from '../../theme';
 import {NAVIGATION_TO_EDIT_SCHEDULE_SCREEN} from '../../navigation';
-import {saveTheme, loadTheme, getCurrentTime, sortTime, formatNumber} from '../../utils';
+import {getCurrentTime, sortTime, formatNumber} from '../../utils';
 
 const ScheduleScreen = ({
   apiStatus,

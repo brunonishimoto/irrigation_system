@@ -9,6 +9,7 @@ import TimePicker from './TimePicker';
 import ScheduleButton from './ScheduleButton';
 import AddButton from './AddButton';
 import SetTime from './SetTime';
+import Modal from './Modal';
 
 export {
   Text,
@@ -22,4 +23,5 @@ export {
   ScheduleButton,
   AddButton,
   SetTime,
+  Modal,
 };

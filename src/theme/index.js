@@ -9,6 +9,7 @@ import HomeStyle from './HomeStyle'
 import ScheduleStyle from './ScheduleStyle'
 import SettingStyle from './SettingStyle';
 import SetTimeStyle from './SetTime';
+import SpinnerStyle from './SpinnerStyle';
 
 
 export {
@@ -23,4 +24,5 @@ export {
   ScheduleStyle,
   SettingStyle,
   SetTimeStyle,
+  SpinnerStyle,
 };
